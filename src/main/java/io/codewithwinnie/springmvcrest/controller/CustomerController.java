@@ -1,6 +1,7 @@
 package io.codewithwinnie.springmvcrest.controller;
 
 import io.codewithwinnie.springmvcrest.domain.Customer;
+import io.codewithwinnie.springmvcrest.exception.CustomerNotFoundException;
 import io.codewithwinnie.springmvcrest.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,14 @@ public class CustomerController {
     
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    
     public Customer saveCustomer(@RequestBody Customer customer) {
         return customerService.saveCustomer(customer);
+    }
+    
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCustomerById(@PathVariable Long id) {
+        customerService.deleteCustomerById(id);
     }
 }
